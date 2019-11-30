@@ -24,46 +24,50 @@ Following code is only the line following and does not have the other configurat
 ✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶✶
 	
 ;-- Line Following Code
-HERE:
-SBIC PINB,4
-JMP CHECK3
-JMP Check_PIN3
-CHECK3: SBIC PINB,3
-JMP CHECK5
-JMP Forward
-CHECK5:SBIC PINB,5
-JMP STOP
-
-Check_PIN3:	
-SBIC PINB,3
-JMP TurnLeft
-SBIC PINB,5
-JMP TurnRight
-
-TurnLeft:
-LDI R20,120 
-OUT OCR0B,R20
-LDI R20,85 
-STS OCR2B,R20
-JMP HERE
-
-Forward:
-LDI R20,88 
-OUT OCR0B,R20
-LDI R20,88
-STS OCR2B,R20
-JMP HERE
-
-TurnRight:
-LDI R21,120 
-STS OCR2B,R21
-LDI R20,85 
-OUT OCR0B,R20
-JMP HERE
 	
-STOP:
-LDI R21,200 
-STS OCR2B,R21
-LDI R20,200 
-OUT OCR0B,R20
-ST: JMP ST
+	HERE:
+		SBIC PINB,4
+		JMP CHECK3
+		JMP Check_PIN3
+	CHECK3: 
+		SBIC PINB,3
+		JMP CHECK5
+		JMP Forward
+	CHECK5:	
+		SBIC PINB,5
+		JMP STOP
+
+	Check_PIN3:	
+		SBIC PINB,3
+		JMP TurnLeft
+		SBIC PINB,5
+		JMP TurnRight
+;-- Code for Controls
+
+	TurnLeft:
+		LDI R20,120 
+		OUT OCR0B,R20
+		LDI R20,85 
+		STS OCR2B,R20
+	JMP HERE
+
+	Forward:
+		LDI R20,88 
+		OUT OCR0B,R20
+		LDI R20,88
+		STS OCR2B,R20
+		JMP HERE
+
+	TurnRight:
+		LDI R21,120 
+		STS OCR2B,R21
+		LDI R20,85 
+		OUT OCR0B,R20
+		JMP HERE
+	
+	STOP:
+		LDI R21,200 
+		STS OCR2B,R21
+		LDI R20,200 
+		OUT OCR0B,R20
+	ST:	JMP ST
